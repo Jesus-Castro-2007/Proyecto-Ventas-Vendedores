@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ventas Vendedores - MVC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+    #body {
+      background: #ffffff;
+      padding: 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      max-width: 480px;
+    }
+    #body h2 {
+      margin-top: 0;
+      color: #1e3a8a;
+    }
+    #body button, #vendedor button {
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    #body_btNuevoVendedor {
+      background-color: #2563eb;
+      color: #ffffff;
+      border: none !important;
+    }
+    #vendedor_btAceptar {
+      background-color: #16a34a;
+      color: #ffffff;
+      border: none !important;
+    }
+    #vendedor_btCancelar {
+      background-color: #e5e7eb;
+      color: #374151;
+    }
+    .linea-reporte {
+      margin: 10px 0;
+      font-size: 15px;
+    }
+    .linea-reporte span {
+      font-weight: bold;
+      color: #111827;
+    }
+    #vendedor {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+    #vendedor input {
+      width: 100%;
+      padding: 6px 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #vendedor .campo {
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SECCIÓN DE LA VISTA MAYOR -->
+  <section id="body">
+    <h2>Ventas Vendedores</h2>
+    <button id="body_btNuevoVendedor">Nuevo Vendedor</button>
+    <hr />
+    <div class="linea-reporte">Cantidad de ventas que fueron por 100$ o menos: <span id="body_lblVentasMenorIgual100">0</span></div>
+    <div class="linea-reporte">Cantidad de ventas mayores a 100$: <span id="body_lblVentasMayor100">0</span></div>
+    <div class="linea-reporte">Monto total de las ventas: <span id="body_lblTotalVentas">0$</span></div>
+    <div class="linea-reporte">Venta con monto menor: <span id="body_lblMenorVenta">0$</span></div>
+    <div class="linea-reporte">Promedio de venta: <span id="body_lblPromVenta">0.00$</span></div>
+  </section>
+
+  <!-- SECCIÓN DE LA VISTA MENOR (INICIA OCULTA CON hidden) -->
+  <section id="vendedor" hidden style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; width: 320px;">
+    <h5>Procesar Vendedor</h5>
+    <div class="campo">
+      <label>Nombre:
+        <input type="text" id="vendedor_inNombre" placeholder="Ingrese nombre" />
+      </label>
+    </div>
+    <div class="campo">
+      <label>Monto de la venta ($):
+        <input type="number" id="vendedor_inMonto" placeholder="0" />
+      </label>
+    </div>
+    <br />
+    <button id="vendedor_btCancelar">Cancelar</button>
+    <button id="vendedor_btAceptar">Aceptar</button>
+  </section>
+
+  <!-- SCRIPT MODULAR DE ARRANQUE E INYECCIÓN DE DEPENDENCIAS -->
+  <script type="module">
+    import cVenta from "./dist/controllers/cVenta.js";
+    import cVendedor from "./dist/controllers/cVendedor.js";
+    import vVentaPlain from "./dist/views/vVentaPlain.js";
+    import vVendedorPlain from "./dist/views/vVendedorPlain.js";
+
+    // 1. Instanciación de las Vistas concretas
+    const vistaMayor = new vVentaPlain();
+    const vistaMenor = new vVendedorPlain();
+
+    // 2. Inyección en los Controladores
+    const controladorMenor = new cVendedor(vistaMenor);
+    new cVenta(vistaMayor, controladorMenor);
+  </script>
+</body>
+</html>
