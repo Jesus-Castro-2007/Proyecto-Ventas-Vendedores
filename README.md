@@ -1,2 +1,11 @@
-# Proyecto-Ventas-Vendedores
-Proyecto Ventas-Vendedores, ingeniería informática, UCLA, DCYT, Programación 1, equipo Falla de Turing.
+# Ventas Vendedores - MVC
+
+## Instrucciones de ejecución
+1. Instalar dependencias:
+   `npm install`
+2. Compilar TypeScript:
+   `npm run build`
+3. Levantar servidor local:
+   `npm start`
+4. Abrir en el navegador:
+   `http://localhost:8080`
